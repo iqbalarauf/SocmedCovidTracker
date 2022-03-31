@@ -11,12 +11,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
-  Widget buildEmail() {
+  Widget buildUsername() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email',
+          'Username',
           style: TextStyle(
               color: Colors.white,
               fontSize: 16,
