@@ -11,7 +11,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
-  Widget buildUsername() {
+  Widget buildUsernamee() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
