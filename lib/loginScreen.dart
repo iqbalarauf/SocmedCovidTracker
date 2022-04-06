@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:protingtiga/mainMenu.dart';
+
+
 
 class LoginScreen extends StatefulWidget {
 
@@ -134,7 +137,11 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,
-        onPressed: () => print('Login Pressed'),
+        onPressed: () {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            return MainMenu();
+          }));
+        },
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15)
@@ -221,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      buildEmail(),
+                      buildUsername(),
                       SizedBox(height: 20),
                       buildPassword(),
                       buildForgotPassBtn(),
