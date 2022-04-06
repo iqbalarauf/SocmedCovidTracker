@@ -25,22 +25,12 @@ class SideBar extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.notifications),
-            title: Text('Riwayat Perjalanan'),
+            title: Text('Notifikasi'),
             onTap: () => null,
           ),
           ListTile(
-            leading: Icon(Icons.assignment),
-            title: Text('Riwayat Perjalanan'),
-            onTap: () => null,
-          ),
-          ListTile(
-            leading: Icon(Icons.assignment_ind),
-            title: Text('Lapor Diri'),
-            onTap: () => null,
-          ),
-          ListTile(
-            leading: Icon(Icons.description),
-            title: Text('Informasi COVID-19'),
+            leading: Icon(Icons.settings),
+            title: Text('Setting'),
             onTap: () => null,
           ),
           Divider(),
