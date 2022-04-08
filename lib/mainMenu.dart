@@ -39,7 +39,7 @@ class _MainMenuState extends State<MainMenu> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.assessment),
-              label: "Statistik Covid"
+              label: "Statistik"
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.description),
