@@ -3,6 +3,7 @@ import 'package:protingtiga/home.dart';
 import 'package:protingtiga/infoCovid.dart';
 import 'package:protingtiga/riwayat.dart';
 import 'package:protingtiga/sideBar.dart';
+import 'package:protingtiga/statistik.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _MainMenuState extends State<MainMenu> {
   int currentIndex = 0;
   final List<Widget> body =[
     Home(),
-    Riwayat(),
+    Statistik(),
     InfoCovid()
   ];
 
@@ -37,8 +38,8 @@ class _MainMenuState extends State<MainMenu> {
             label: "Home"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.assignment_ind),
-              label: "Riwayat"
+              icon: Icon(Icons.assessment),
+              label: "Statistik Covid"
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.description),
