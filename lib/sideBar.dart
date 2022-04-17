@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:protingtiga/loginScreen.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -37,7 +38,34 @@ class SideBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Log out'),
-            onTap: () => null,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Logging out'),
+                    content: Text('Are you sure?'),
+                    actions: [
+                      MaterialButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('No'),
+                      ),
+                      MaterialButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return LoginScreen();
+                          }));
+                        },
+                        child: Text('Yes'),
+                      ),
+                    ],
+                  );
+                },
+                barrierDismissible: false,
+              );
+            },
           ),
         ],
       ),
