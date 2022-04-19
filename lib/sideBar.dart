@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protingtiga/loginScreen.dart';
+import 'package:protingtiga/setting.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -32,7 +33,12 @@ class SideBar extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Setting'),
-            onTap: () => null,
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return Setting();
+                  }));
+            }
           ),
           Divider(),
           ListTile(
