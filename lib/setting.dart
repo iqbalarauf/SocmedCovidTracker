@@ -12,7 +12,6 @@ class _SettingState extends State<Setting> {
   var _value1 = false;
   var _value2 = false;
   var _value3 = false;
-  var _value4 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _SettingState extends State<Setting> {
               _value1 = value;
             });
           },
-          title: Text('asd'),
+          title: Text('Notification'),
           ),
 
           SwitchListTile(value: _value2, onChanged: (value) {
@@ -35,7 +34,7 @@ class _SettingState extends State<Setting> {
               _value2 = value;
             });
           },
-            title: Text('asd'),
+            title: Text('Enable location'),
           ),
 
           SwitchListTile(value: _value3, onChanged: (value) {
@@ -43,16 +42,9 @@ class _SettingState extends State<Setting> {
               _value3 = value;
             });
           },
-            title: Text('asd'),
+            title: Text('English Language'),
           ),
 
-          SwitchListTile(value: _value4, onChanged: (value) {
-            setState(() {
-              _value4 = value;
-            });
-          },
-            title: Text('asd'),
-          ),
         ],
       ),
     );

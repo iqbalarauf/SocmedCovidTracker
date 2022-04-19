@@ -25,11 +25,11 @@ class SideBar extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
+          /*ListTile(
             leading: Icon(Icons.notifications),
             title: Text('Notifikasi'),
             onTap: () => null,
-          ),
+          ),*/
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Setting'),
