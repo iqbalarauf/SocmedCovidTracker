@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:protingtiga/loginScreen.dart';
+import 'package:protingtiga/penanganan.dart';
 import 'package:protingtiga/setting.dart';
 
 class SideBar extends StatelessWidget {
@@ -30,6 +31,16 @@ class SideBar extends StatelessWidget {
             title: Text('Notifikasi'),
             onTap: () => null,
           ),*/
+          ListTile(
+              leading: Icon(Icons.warning),
+              title: Text('Penanganan COVID-19'),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return Penanganan();
+                    }));
+              }
+          ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Setting'),
