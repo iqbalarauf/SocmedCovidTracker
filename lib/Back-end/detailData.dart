@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:protingtiga/DataModel.dart';
+import 'package:protingtiga/Back-end/DataModel.dart';
 
 class DetailData extends StatelessWidget {
   final DataModel;

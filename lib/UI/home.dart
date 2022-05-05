@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:protingtiga/DataModel.dart';
-import 'package:protingtiga/detailData.dart';
+import 'package:protingtiga/Back-end/DataModel.dart';
+import 'package:protingtiga/Back-end/detailData.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -60,38 +60,38 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: dataBerita.length,
-        itemBuilder: (context, index){
-          return Card(
-            child: ListTile(
-              leading: SizedBox(
-                width: 50,
-                height: 50,
-                child: Image.network(dataBerita[index].ImageUrl),
-              ),
-              title: Text(dataBerita[index].name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14
-                  )
-                ),
-              subtitle: Text(dataBerita[index].sub),
-              trailing: Icon(Icons.more_vert),
-              isThreeLine: true,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => DetailData(
-                        DataModel: dataBerita[index],
+        body: ListView.builder(
+            itemCount: dataBerita.length,
+            itemBuilder: (context, index){
+              return Card(
+                child: ListTile(
+                  leading: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Image.network(dataBerita[index].ImageUrl),
+                  ),
+                  title: Text(dataBerita[index].name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14
                       )
-                  )
-                );
-              },
-              ),
-            );
-          }
-          )
+                  ),
+                  subtitle: Text(dataBerita[index].sub),
+                  trailing: Icon(Icons.more_vert),
+                  isThreeLine: true,
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => DetailData(
+                              DataModel: dataBerita[index],
+                            )
+                        )
+                    );
+                  },
+                ),
+              );
+            }
+        )
     );
   }
 }

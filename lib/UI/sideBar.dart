@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:protingtiga/loginScreen.dart';
-import 'package:protingtiga/penanganan.dart';
-import 'package:protingtiga/setting.dart';
+import 'package:protingtiga/UI/loginScreen.dart';
+import 'package:protingtiga/UI/penanganan.dart';
+import 'package:protingtiga/UI/setting.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({Key? key}) : super(key: key);

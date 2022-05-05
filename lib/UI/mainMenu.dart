@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:protingtiga/home.dart';
-import 'package:protingtiga/infoCovid.dart';
-import 'package:protingtiga/riwayat.dart';
-import 'package:protingtiga/sideBar.dart';
-import 'package:protingtiga/statistik.dart';
+import 'package:protingtiga/UI/home.dart';
+import 'package:protingtiga/UI/infoCovid.dart';
+import 'package:protingtiga/UI/sideBar.dart';
+import 'package:protingtiga/UI/statistik.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
