@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:protingtiga/DataModel.dart';
-import 'package:protingtiga/detailData.dart';
+import 'package:webfeed/webfeed.dart';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,88 +12,151 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  static const String FEED_URL =
+      'https://covid19.go.id/feed/masyarakat-umum';
+  late Home _feed;
+  late String _title;
+  static const String loadingFeedMsg = 'Loading Feed...';
+  static const String feedLoadErrorMsg = 'Error Loading Feed.';
+  static const String feedOpenErrorMsg = 'Error Opening Feed.';
+  static const String placeholderImg = 'images/no_image.png';
+  late GlobalKey<RefreshIndicatorState> _refreshKey;
 
-  static List<String> namaBerita = [
-    'Sebaran 559 Corona 18 April 2022, Tertinggi DKI Jakarta Sumbang 170, Jawa Barat 124 Kasus',
-    '99 Persen Warga RI Disebut Kebal COVID-19, Ini Alasannya',
-    'Pemerintah Imbau Tak ke Luar Negeri saat Libur Panjang Lebaran',
-    'Persiapan Mudik Lebaran 2022 Aman dan Nyaman, Pengendalian COVID-19?',
-    'RS Lapangan Indrapura Resmi Ditutup, Khofifah: Terima Kasih Semuanya',
-    'WHO Bawa Kabar Baik Lagi soal Covid-19, Segera Berakhir?',
-    'Aturan Baru: Nonton Pertandingan Olahraga Wajib Booster',
-  ];
+  updateTitle(title) {
+    setState(() {
+      _title = title;
+    });
+  }
 
-  static List<String> deskripsi = [
-    'Pada Senin hari ini, tercatat jumlah pasien yang terkonfirmasi positif terpapar Covid-19 bertambah sebanyak 559 pasien.Jumlah ini lebih sedikit dari jumlah angka pasien yang terkonfirmasi positif terpapar Covid-19 pada hari sebelumnya, yakni 607 orang.Dengan tambahan angka positif berjumlah 559 orang, maka total jumlah pasien yang terkonfirmasi positif akibat virus corona pada hari ini menjadi 6.040.432 orang.',
-    'Menteri Kesehatan RI Budi Gunadi Sadikin mengatakan antibodi yang terbentuk di masyarakat naik menjadi 99,2 persen menjelang Lebaran."Bisa disampaikan bahwa kadar antibodi masyarakat Indonesia naik menjadi 99,2 persen. Artinya, 99,2 persen dari populasi masyarakat Indonesia sudah memiliki antibodi, bisa itu berasal dari vaksinasi maupun juga berasal dari infeksi,".',
-    'Pemerintah memberikan cuti bersama Lebaran 2022 yang lebih panjang dibandingkan tahun sebelumnya. Namun, masyarakat diminta tidak pergi ke luar negeri saat libur Lebaran. "Dengan adanya libur panjang, masyarakat juga diimbau untuk tidak berpergian ke luar negeri," kata Menteri Koordinator Bidang Perekonomian Airlangga Hartarto usai rapat terbatas dengan Presiden Joko Widodo di Kantor Presiden, Jakarta, Senin (18/4).',
-    'Berbeda dari dua tahun sebelumnya, masyarakat boleh melakukan mudik Lebaran pada tahun ini. Pemerintah optimistis penyelenggaraan mudik Lebaran 2022 dapat berjalan aman dari serangan COVID-19. Pemerintah memastikan, kebijakan mudik tahun ini juga dipersiapkan dengan matang bekerja sama berbagai lintas sektor.',
-    'Rumah Sakit Lapangan Indrapura Surabaya resmi ditutup seiring dengan terbitnya SK Gubernur Jawa Timur Nomor 188/237/KPTS/013/2022). Setelah beroperasi selama 22 bulan dan berjibaku tangani ribuan pasien covid-19, operasional RS Lapangan Indrapura akhirnya diberhentikan. Hal ini juga merujuk pada kondisi pandemi covid-19 di Jawa Timur yang terus membaik dan terkendali.',
-    'Organisasi Kesehatan Dunia (WHO) memberi laporan terbaru soal kasus Covid-19 dunia. Meski belum ada tanda-tanda berakhir, namun penurunan kasus terlihat. Dari update epidemiologi mingguan, 19-12 April 2022, WHO mencatat kasus Covid-19 telah mengalami penurunan 24% dibandingkan sebelumnya. Tren penurunan sudah terjadi tiga minggu berturut-turut.',
-    'Pemerintah memperbarui aturan kegiatan masyarakat aman Covid-19 . Kini, penonton pertandingan olahraga wajib vaksinasi booster. Jika belum booster, minimal masyarakat yang akan menonnton telah divaksin dosis kedua, Hanya mereka masih harus dites antigen di lokasi pertandingan. Aturan ini tertuang dalam Instruksi Menteri Dalam Negeri Nomor 22 Tahun 2022 tentang Perpanjangan Pemberlakuan Pembatasan Kegiatan Masyarakat (PPKM) di Jawa-Bali hingga 9 Mei 2022 mendatang.',
-  ];
+  updateFeed(feed) {
+    setState(() {
+      _feed = feed;
+    });
+  }
 
-  static List url = [
-    'https://statik.tempo.co/data/2020/07/16/id_953075/953075_720.jpg',
-    'https://cdn-2.tstatic.net/tribunnews/foto/bank/images/ilustrasi-covid-19-corona-1207.jpg',
-    'https://cdn-2.tstatic.net/tribunnews/foto/bank/images/grafis-update-berita-covid-19.jpg',
-    'https://mmc.kalteng.go.id/files/berita/29042020072714_0.jpeg',
-    'https://media.suara.com/pictures/653x366/2020/04/27/82544-ilustrasi-covid-19.jpg',
-    'https://awsimages.detik.net.id/visual/2020/08/18/logo-world-health-organization-who_169.jpeg?w=715&q=90',
-    'https://pict-c.sindonews.net/dyn/732/pena/news/2022/04/19/15/747185/aturan-baru-nonton-pertandingan-olahraga-wajib-booster-ojl.jpg',
-  ];
+  Future<void> openFeed(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: false,
+      );
+      return;
+    }
+    updateTitle(feedOpenErrorMsg);
+  }
 
-  static List sub = [
-    'Pada Senin hari ini, tercatat jumlah pasien yang terkonfirmasi positif terpapar Covid-19 bertambah...',
-    'Menteri Kesehatan RI Budi Gunadi Sadikin mengatakan antibodi yang terbentuk di masyarakat naik men...',
-    'Pemerintah memberikan cuti bersama Lebaran 2022 yang lebih panjang dibandingkan tahun sebelumnya...',
-    'Berbeda dari dua tahun sebelumnya, masyarakat boleh melakukan mudik Lebaran pada tahun ini...',
-    'Rumah Sakit Lapangan Indrapura Surabaya resmi ditutup seiring dengan terbitnya SK Gubernur Jawa...',
-    'Organisasi Kesehatan Dunia (WHO) memberi laporan terbaru soal kasus Covid-19 dunia. Meski belum...',
-    'Pemerintah memperbarui aturan kegiatan masyarakat aman Covid-19 . Kini, penonton pertandingan...',
-  ];
+  load() async {
+    updateTitle(loadingFeedMsg);
+    loadFeed().then((result) {
+      if (null == result || result.toString().isEmpty) {
+        updateTitle(feedLoadErrorMsg);
+        return;
+      }
+      updateFeed(result);
+      updateTitle(_feed.title);
+    });
+  }
 
-  final List<DataModel> dataBerita = List.generate(
-      namaBerita.length,
-          (index) => DataModel('${namaBerita[index]}', '${url[index]}',
-        '${deskripsi[index]}', '${sub[index]}',));
+  Future<Home> loadFeed() async {
+    try {
+      final client = http.Client();
+      final response = await client.get(FEED_URL);
+      return Home.parse(response.body);
+    } catch (e) {
+      //
+    }
+    return null;
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    _refreshKey = GlobalKey<RefreshIndicatorState>();
+    updateTitle(widget.title);
+    load();
+  }
+
+  title(title) {
+    return Text(
+      title,
+      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  subtitle(subTitle) {
+    return Text(
+      subTitle,
+      style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w100),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  thumbnail(imageUrl) {
+    return Padding(
+      padding: EdgeInsets.only(left: 15.0),
+      child: CachedNetworkImage(
+        placeholder: (context, url) => Image.asset(placeholderImg),
+        imageUrl: imageUrl,
+        height: 50,
+        width: 70,
+        alignment: Alignment.center,
+        fit: BoxFit.fill,
+      ),
+    );
+  }
+
+  rightIcon() {
+    return Icon(
+      Icons.keyboard_arrow_right,
+      color: Colors.grey,
+      size: 30.0,
+    );
+  }
+
+  list() {
+    return ListView.builder(
+      itemCount: _feed.items.length,
+      itemBuilder: (BuildContext context, int index) {
+        final item = _feed.items[index];
+        return ListTile(
+          title: title(item.title),
+          subtitle: subtitle(item.pubDate),
+          leading: thumbnail(item.enclosure.url),
+          trailing: rightIcon(),
+          contentPadding: EdgeInsets.all(5.0),
+          onTap: () => openFeed(item.link),
+        );
+      },
+    );
+  }
+
+  isFeedEmpty() {
+    return null == _feed || null == _feed.items;
+  }
+
+  body() {
+    return isFeedEmpty()
+        ? Center(
+      child: CircularProgressIndicator(),
+    )
+        : RefreshIndicator(
+      key: _refreshKey,
+      child: list(),
+      onRefresh: () => load(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: dataBerita.length,
-        itemBuilder: (context, index){
-          return Card(
-            child: ListTile(
-              leading: SizedBox(
-                width: 50,
-                height: 50,
-                child: Image.network(dataBerita[index].ImageUrl),
-              ),
-              title: Text(dataBerita[index].name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14
-                  )
-                ),
-              subtitle: Text(dataBerita[index].sub),
-              trailing: Icon(Icons.more_vert),
-              isThreeLine: true,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => DetailData(
-                        DataModel: dataBerita[index],
-                      )
-                  )
-                );
-              },
-              ),
-            );
-          }
-          )
+      appBar: AppBar(
+        title: Text(_title),
+      ),
+      body: body(),
     );
   }
 }
