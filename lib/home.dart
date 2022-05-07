@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   static const String FEED_URL =
       'https://covid19.go.id/feed/masyarakat-umum';
-  late Home _feed;
+  late RssFeed _feed;
   late String _title;
   static const String loadingFeedMsg = 'Loading Feed...';
   static const String feedLoadErrorMsg = 'Error Loading Feed.';
@@ -54,15 +54,15 @@ class _HomeState extends State<Home> {
         return;
       }
       updateFeed(result);
-      updateTitle(_feed.title);
+      updateTitle(_feed.Home);
     });
   }
 
-  Future<Home> loadFeed() async {
+  Future<RssFeed> loadFeed() async {
     try {
       final client = http.Client();
       final response = await client.get(FEED_URL);
-      return Home.parse(response.body);
+      return RssFeed.parse(response.body);
     } catch (e) {
       //
     }
@@ -119,13 +119,13 @@ class _HomeState extends State<Home> {
 
   list() {
     return ListView.builder(
-      itemCount: _feed.items.length,
+      itemCount: _feed.items?.length,
       itemBuilder: (BuildContext context, int index) {
-        final item = _feed.items[index];
+        final item = _feed.items![index];
         return ListTile(
           title: title(item.title),
           subtitle: subtitle(item.pubDate),
-          leading: thumbnail(item.enclosure.url),
+          leading: thumbnail(item.enclosure?.url),
           trailing: rightIcon(),
           contentPadding: EdgeInsets.all(5.0),
           onTap: () => openFeed(item.link),
