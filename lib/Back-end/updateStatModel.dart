@@ -6,7 +6,7 @@ class UpdateStatDetail {
   UpdateStatDetail(
       {required this.data, required this.update, required this.total});
 
-  factory UpdateStatDetail.fromJson(Map<String, dynamic> json) {
+  factory UpdateStatDetail.fromJson(Map<dynamic, dynamic> json) {
     return UpdateStatDetail(
         data: Data.fromJson(json['data']), // Pemeriksaan Harian
         update: Update.fromJson(json['update']), // Pemeriksaan Harian
@@ -22,7 +22,7 @@ class Data {
 
   Data({required this.jumlah_odp, required this.jumlah_pdp, required this.total_spesimen, required this.total_spesimen_negatif});
 
-  factory Data.fromJson(Map<String, dynamic> json) {
+  factory Data.fromJson(Map<dynamic, dynamic> json) {
     return new Data(
       jumlah_odp: json['jumlah_odp'],
       jumlah_pdp: json['jumlah_pdp'],
@@ -41,7 +41,7 @@ class Update {
 
   Update({required this.jumlah_positif, required this.jumlah_meninggal, required this.jumlah_sembuh, required this.jumlah_dirawat, required this.tanggal});
 
-  factory Update.fromJson(Map<String, dynamic> json) {
+  factory Update.fromJson(Map<dynamic, dynamic> json) {
     return new Update(
       jumlah_positif: json['jumlah_positif'],
       jumlah_meninggal: json['jumlah_meninggal'],
@@ -60,7 +60,7 @@ class Total {
 
   Total({required this.jumlah_positif_kum, required this.jumlah_meninggal_kum, required this.jumlah_sembuh_kum, required this.jumlah_dirawat_kum});
 
-  factory Total.fromJson(Map<String, dynamic> json) {
+  factory Total.fromJson(Map<dynamic, dynamic> json) {
     return new Total(
         jumlah_positif_kum: json['jumlah_positif'],
         jumlah_meninggal_kum: json['jumlah_meninggal'],

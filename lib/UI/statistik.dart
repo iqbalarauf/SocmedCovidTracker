@@ -22,7 +22,7 @@ class _StatistikState extends State<Statistik> {
     final response =
     await http.get(Uri.parse("https://data.covid19.go.id/public/api/update.json"));
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      var data = jsonDecode(response.body);
       setState(() {
         for (Map i in data) {
           _list.add(UpdateStatDetail.fromJson(i));
