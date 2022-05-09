@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Penanganan extends StatefulWidget {
   const Penanganan({Key? key}) : super(key: key);
@@ -125,7 +126,15 @@ class _PenangananState extends State<Penanganan> {
                         fontWeight: FontWeight.bold,
                       )),
                   child: Text("Hubungi 119"),
-                  onPressed: () {},
+                  onPressed: () async {
+                    String callcenter = '119';
+                    String telephoneUrl = "tel:$callcenter";
+                    if (await canLaunch(telephoneUrl)) {
+                      await launch(telephoneUrl);
+                    } else {
+                      throw "Error occured trying to call that number.";
+                    }
+                  },
                 ),
                 SizedBox(width: 25),
                 OutlinedButton(
@@ -141,7 +150,14 @@ class _PenangananState extends State<Penanganan> {
                       ),
                   ),
                   child: Text("Periksa Diri"),
-                  onPressed: () {},
+                  onPressed: () async {
+                    const url = 'https://corona.jatengprov.go.id/screening';
+                    if(await canLaunch(url)){
+                      await launch(url);
+                    }else {
+                      throw 'Could not launch $url';
+                    }
+                  },
                 ),
               ],
             ),

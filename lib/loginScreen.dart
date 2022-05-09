@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Icons.email,
                     color: Color(0xffaee1f6)
                 ),
-                hintText: 'Email',
+                hintText: 'Username',
                 hintStyle: TextStyle(
                     color: Colors.black38
                 )
