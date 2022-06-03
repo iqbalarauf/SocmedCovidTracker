@@ -39,7 +39,7 @@ class _StatistikState extends State<Statistik> {
             Container(
               child: Text("Sembuh: 1.663.998 jiwa"),
               width: 250,
-              color: Colors.green,
+              color: Colors.blue,
               padding: EdgeInsets.all(16.0),
             ),
             Container(
