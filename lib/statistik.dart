@@ -13,16 +13,7 @@ class _StatistikState extends State<Statistik> {
     return Scaffold(
         body: Column(
           children: <Widget>[
-            Container(
-              color: Colors.white,
-              width: 400,
-              height: 300,
-              padding: EdgeInsets.all(3),
-              child: Image(
-                image: NetworkImage("https://awsimages.detik.net.id/community/media/visual/2020/05/15/2df4fd60-7f64-4325-8f6b-ca357fd2321e.jpeg?w=879"),
-                fit: BoxFit.contain,
-              ),
-            ),
+
             Container(
               child: Text("Terkonfirmasi: 1.816.045 jiwa"),
               width: 250,
@@ -45,7 +36,7 @@ class _StatistikState extends State<Statistik> {
             Container(
               child: Text("Wafat: 50.404 jiwa"),
               width: 250,
-              color: Colors.red,
+              color: Colors.blue,
               padding: EdgeInsets.all(16.0),
             ),
           ],
