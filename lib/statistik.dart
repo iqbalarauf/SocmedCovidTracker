@@ -15,7 +15,7 @@ late Covid covid_res;
 
 Future<Covid> getIDNCount() async {
   final response = await http
-      .get(Uri.parse('https://covid19.mathdro.id/api/countries/Indonesia'));
+      .get(Uri.parse('https://data.covid19.go.id/public/api/update.json'));
   return Covid.fromJson(json.decode(response.body));
 }
 
@@ -25,7 +25,8 @@ class _StatistikState extends State<Statistik> {
       var countloading = true;
     });
     covid_res = await getIDNCount();
-    print("covid deaths is" + covid_res.deaths.toString());
+    print("covid deaths is" +
+        covid_res.update!.total!.jumlahMeninggal.toString());
     setState(() {
       var countloading = false;
     });
@@ -43,27 +44,33 @@ class _StatistikState extends State<Statistik> {
         body: Column(
       children: <Widget>[
         Container(
-          child: Text("Tanggal: " + covid_res.lastupdate),
+          child: Text(
+              "Tanggal: " + covid_res.update!.penambahan!.tanggal.toString()),
           width: 300,
           color: Colors.orange,
           padding: EdgeInsets.all(16.0),
         ),
         Divider(),
         Container(
-          child: Text(
-              "Terkonfirmasi: " + covid_res.confvalue.toString() + " jiwa"),
+          child: Text("Terkonfirmasi: " +
+              covid_res.update!.total!.jumlahPositif.toString() +
+              " jiwa"),
           width: 300,
           color: Colors.orange,
           padding: EdgeInsets.all(16.0),
         ),
         Container(
-          child: Text("Sembuh: " + covid_res.recvalue.toString() + " jiwa"),
+          child: Text("Sembuh: " +
+              covid_res.update!.total!.jumlahSembuh.toString() +
+              " jiwa"),
           width: 250,
           color: Colors.yellow,
           padding: EdgeInsets.all(16.0),
         ),
         Container(
-          child: Text("Wafat: " + covid_res.deaths.toString() + " jiwa"),
+          child: Text("Wafat: " +
+              covid_res.update!.total!.jumlahMeninggal.toString() +
+              " jiwa"),
           width: 250,
           color: Colors.red,
           padding: EdgeInsets.all(16.0),
