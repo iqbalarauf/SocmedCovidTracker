@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "698776866924",
+    "project_id": "socmedcovidtracker",
+    "storage_bucket": "socmedcovidtracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698776866924:android:431f54658697696dc7c849",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698776866924-q3ev5pv0vuh08ehn5ttt9a3u7oq22b18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1hWkqvSMqR32BWfpyQXxEdsUnYq-9Ev0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698776866924-q3ev5pv0vuh08ehn5ttt9a3u7oq22b18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
