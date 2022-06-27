@@ -52,7 +52,7 @@ class _StatistikState extends State<Statistik> {
         ),
         Divider(),
         Container(
-          child: Text("Terkonfirmasi: " +
+          child: Text("Total Konfirmasi: " +
               covid_res.update!.total!.jumlahPositif.toString() +
               " jiwa"),
           width: 300,
@@ -60,7 +60,7 @@ class _StatistikState extends State<Statistik> {
           padding: EdgeInsets.all(16.0),
         ),
         Container(
-          child: Text("Sembuh: " +
+          child: Text("Total Kesembuhan: " +
               covid_res.update!.total!.jumlahSembuh.toString() +
               " jiwa"),
           width: 250,
@@ -68,8 +68,33 @@ class _StatistikState extends State<Statistik> {
           padding: EdgeInsets.all(16.0),
         ),
         Container(
-          child: Text("Wafat: " +
+          child: Text("Total Wafat: " +
               covid_res.update!.total!.jumlahMeninggal.toString() +
+              " jiwa"),
+          width: 250,
+          color: Colors.red,
+          padding: EdgeInsets.all(16.0),
+        ),
+        Divider(),
+        Container(
+          child: Text("Terkonfirmasi: " +
+              covid_res.update!.penambahan!.jumlahPositif.toString() +
+              " jiwa"),
+          width: 300,
+          color: Colors.orange,
+          padding: EdgeInsets.all(16.0),
+        ),
+        Container(
+          child: Text("Sembuh: " +
+              covid_res.update!.penambahan!.jumlahSembuh.toString() +
+              " jiwa"),
+          width: 250,
+          color: Colors.yellow,
+          padding: EdgeInsets.all(16.0),
+        ),
+        Container(
+          child: Text("Wafat: " +
+              covid_res.update!.penambahan!.jumlahMeninggal.toString() +
               " jiwa"),
           width: 250,
           color: Colors.red,
