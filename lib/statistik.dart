@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:protingtiga/dataCovid.dart';
+import 'package:http/http.dart' as http;
 
 class Statistik extends StatefulWidget {
   const Statistik({Key? key}) : super(key: key);
@@ -7,33 +11,59 @@ class Statistik extends StatefulWidget {
   State<Statistik> createState() => _StatistikState();
 }
 
+late Covid covid_res;
+
+Future<Covid> getIDNCount() async {
+  final response = await http
+      .get(Uri.parse('https://covid19.mathdro.id/api/countries/Indonesia'));
+  return Covid.fromJson(json.decode(response.body));
+}
+
 class _StatistikState extends State<Statistik> {
+  Future<void> loadcount() async {
+    setState(() {
+      var countloading = true;
+    });
+    covid_res = await getIDNCount();
+    print("covid deaths is" + covid_res.deaths.toString());
+    setState(() {
+      var countloading = false;
+    });
+  }
+
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadcount();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: <Widget>[
         Container(
-          child: Text("Terkonfirmasi: 1.816.045 jiwa"),
+          child: Text("Tanggal: " + covid_res.lastupdate),
           width: 300,
           color: Colors.orange,
           padding: EdgeInsets.all(16.0),
         ),
         Divider(),
         Container(
-          child: Text("Dalam Perawatan: 101.650 jiwa"),
+          child: Text(
+              "Terkonfirmasi: " + covid_res.confvalue.toString() + " jiwa"),
+          width: 300,
+          color: Colors.orange,
+          padding: EdgeInsets.all(16.0),
+        ),
+        Container(
+          child: Text("Sembuh: " + covid_res.recvalue.toString() + " jiwa"),
           width: 250,
           color: Colors.yellow,
           padding: EdgeInsets.all(16.0),
         ),
         Container(
-          child: Text("Sembuh: 1.663.998 jiwa"),
-          width: 250,
-          color: Colors.blue,
-          padding: EdgeInsets.all(16.0),
-        ),
-        Container(
-          child: Text("Wafat: 50.404 jiwa"),
+          child: Text("Wafat: " + covid_res.deaths.toString() + " jiwa"),
           width: 250,
           color: Colors.red,
           padding: EdgeInsets.all(16.0),
