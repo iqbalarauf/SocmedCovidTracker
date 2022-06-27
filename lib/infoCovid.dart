@@ -26,44 +26,58 @@ class _InfoCovidState extends State<InfoCovid> {
     ExpansionItem(
         header: "Bagaimana cara mencegah diri tertular?",
         body:
-            "Seseorang dapat terinfeksi dari penderita COVID-19. Penyakit ini dapat menyebar melalui tetesan kecil (droplet) dari hidung atau mulut pada saat batuk atau bersin. Droplet tersebut kemudian jatuh pada benda di sekitarnya. Kemudian jika ada orang lain menyentuh benda yang sudah terkontaminasi dengan droplet tersebut, lalu orang itu menyentuh mata, hidung atau mulut (segitiga wajah), maka orang itu dapat terinfeksi COVID-19. Seseorang juga bisa terinfeksi COVID-19 ketika tanpa sengaja menghirup droplet dari penderita. Inilah sebabnya mengapa kita penting untuk menjaga jarak hingga kurang lebih satu meter dari orang yang sakit.")
+            "Seseorang dapat terinfeksi dari penderita COVID-19. Penyakit ini dapat menyebar melalui tetesan kecil (droplet) dari hidung atau mulut pada saat batuk atau bersin. Droplet tersebut kemudian jatuh pada benda di sekitarnya. Kemudian jika ada orang lain menyentuh benda yang sudah terkontaminasi dengan droplet tersebut, lalu orang itu menyentuh mata, hidung atau mulut (segitiga wajah), maka orang itu dapat terinfeksi COVID-19. Seseorang juga bisa terinfeksi COVID-19 ketika tanpa sengaja menghirup droplet dari penderita. Inilah sebabnya mengapa kita penting untuk menjaga jarak hingga kurang lebih satu meter dari orang yang sakit."),
+    ExpansionItem(
+        header: "Bagaimana jika saya mengalami gejala lebih lanjut?",
+        body:
+            "Anda dapat mengakses menu Penanganan COVID-19 untuk informasi lebih lanjut")
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      children: [
-        ExpansionPanelList(
-          expansionCallback: (int index, bool isExpanded) {
-            setState(() {
-              items[index].isExpanded = !items[index].isExpanded;
-            });
+          children: [
+            ExpansionPanelList(
+              expansionCallback: (int index, bool isExpanded) {
+                setState(() {
+                  items[index].isExpanded = !items[index].isExpanded;
+                });
+              },
+              children: items.map((ExpansionItem item) {
+                return ExpansionPanel(
+                    headerBuilder: (BuildContext context, bool isExpanded) {
+                      return Container(
+                        margin: EdgeInsets.only(left: 10, top: 15),
+                        child: Text(
+                          item.header,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14,
+                              color: Colors.black),
+                        ),
+                      );
+                    },
+                    isExpanded: item.isExpanded,
+                    body: Container(
+                      margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                      child: Text(item.body),
+                    ));
+              }).toList(),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Penanganan()),
+            );
           },
-          children: items.map((ExpansionItem item) {
-            return ExpansionPanel(
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Container(
-                    margin: EdgeInsets.only(left: 10, top: 15),
-                    child: Text(
-                      item.header,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14,
-                          color: Colors.black),
-                    ),
-                  );
-                },
-                isExpanded: item.isExpanded,
-                body: Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Text(item.body),
-                ));
-          }).toList(),
-        )
-      ],
-    ));
+          label: const Text('Menangani Gejala'),
+          backgroundColor: Colors.red,
+        ));
   }
 }
 
