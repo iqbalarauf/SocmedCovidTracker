@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:protingtiga/SignUp.dart';
+import 'package:protingtiga/forgetpass.dart';
 import 'package:protingtiga/mainMenu.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,12 +11,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+
   Widget buildUsername() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Username',
+          'E-Mail',
           style: TextStyle(
               color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
         ),
@@ -32,11 +37,12 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.black87),
+            controller: _emailTextController,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
                 prefixIcon: Icon(Icons.email, color: Color(0xffaee1f6)),
-                hintText: 'Username',
+                hintText: 'E-Mail',
                 hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
@@ -67,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextField(
             obscureText: true,
             style: TextStyle(color: Colors.black87),
+            controller: _passwordTextController,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
@@ -82,8 +89,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget buildForgotPassBtn() {
     return Container(
       alignment: Alignment.centerRight,
-      child: FlatButton(
-        onPressed: () => print("Forgot Password Pressed"),
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return ForgetPass();
+          }));
+        },
         padding: EdgeInsets.only(right: 0),
         child: Text(
           'Forgot Password?',
@@ -97,13 +108,19 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
-      child: RaisedButton(
+      child: MaterialButton(
         elevation: 5,
         onPressed: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) {
-            return MainMenu();
-          }));
+          FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: _emailTextController.text,
+                  password: _passwordTextController.text)
+              .then((value) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainMenu()));
+          }).onError((error, stackTrace) {
+            print("Error ${error.toString()}");
+          });
         },
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -123,7 +140,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return SignUp();
+          return SignUpScreen();
         }));
       },
       child: RichText(
@@ -135,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 18,
                   fontWeight: FontWeight.w500)),
           TextSpan(
-              text: ' Sign Up',
+              text: 'Sign Up',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
