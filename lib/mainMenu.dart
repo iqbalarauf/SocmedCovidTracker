@@ -46,14 +46,21 @@ class _MainMenuState extends State<MainMenu> {
         onTap: ontap,
         currentIndex: currentIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.assessment), label: "Statistik"),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: "Riwayat"),
+              icon: Icon(Icons.home, color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.description),
-              label: "Informasi Covid",
-              backgroundColor: Color.fromARGB(153, 127, 127, 127)),
+              icon: Icon(Icons.assessment,
+                  color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Statistik"),
+          BottomNavigationBarItem(
+              icon:
+                  Icon(Icons.history, color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Riwayat"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.description,
+                  color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Informasi Covid"),
         ],
       ),
     );
