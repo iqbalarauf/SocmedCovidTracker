@@ -3,6 +3,7 @@ import 'package:protingtiga/home.dart';
 import 'package:protingtiga/infoCovid.dart';
 import 'package:protingtiga/riwayat.dart';
 import 'package:protingtiga/statistik.dart';
+import 'package:protingtiga/setting.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _MainMenuState extends State<MainMenu> {
           backgroundColor: Color.fromARGB(0, 255, 255, 255),
           elevation: 0,
           title: Text(
-            "Selamat Datang",
+            "Social Media Covid Tracker",
             style: TextStyle(
               color: Color.fromARGB(205, 0, 0, 0),
               fontWeight: FontWeight.bold,
@@ -32,7 +33,14 @@ class _MainMenuState extends State<MainMenu> {
           actions: [
             FloatingActionButton.small(
               backgroundColor: Color.fromARGB(255, 255, 255, 255),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Setting(),
+                  ),
+                );
+              },
               child: Icon(
                 Icons.person,
                 size: 18,
