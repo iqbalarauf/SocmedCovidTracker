@@ -13,13 +13,8 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-
   int currentIndex = 0;
-  final List<Widget> body =[
-    Home(),
-    Statistik(),
-    InfoCovid()
-  ];
+  final List<Widget> body = [Home(), Statistik(), Riwayat(), InfoCovid()];
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +26,22 @@ class _MainMenuState extends State<MainMenu> {
       body: body[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: ontap,
-        currentIndex: currentIndex ,
+        currentIndex: currentIndex,
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.assessment),
-              label: "Statistik"
-          ),
+              icon: Icon(Icons.assessment), label: "Statistik"),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: "Riwayat"),
           BottomNavigationBarItem(
               icon: Icon(Icons.description),
-              label: "Informasi Covid"
-          ),
+              label: "Informasi Covid",
+              backgroundColor: Color(0x998ebbfd)),
         ],
       ),
     );
   }
 
-  void ontap(int index){
+  void ontap(int index) {
     setState(() {
       currentIndex = index;
     });
