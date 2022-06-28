@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:protingtiga/home.dart';
 import 'package:protingtiga/infoCovid.dart';
 import 'package:protingtiga/riwayat.dart';
-import 'package:protingtiga/sideBar.dart';
 import 'package:protingtiga/statistik.dart';
 
 class MainMenu extends StatefulWidget {
@@ -19,10 +18,29 @@ class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(),
       appBar: AppBar(
-        title: Text('Socmed Covid Tracker'),
-      ),
+          backgroundColor: Color.fromARGB(0, 255, 255, 255),
+          elevation: 0,
+          title: Text(
+            "Selamat Datang",
+            style: TextStyle(
+              color: Color.fromARGB(205, 0, 0, 0),
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            FloatingActionButton.small(
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              onPressed: () {},
+              child: Icon(
+                Icons.person,
+                size: 18,
+                color: Colors.black,
+              ),
+            ),
+          ],
+          automaticallyImplyLeading: false),
       body: body[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: ontap,
@@ -35,7 +53,7 @@ class _MainMenuState extends State<MainMenu> {
           BottomNavigationBarItem(
               icon: Icon(Icons.description),
               label: "Informasi Covid",
-              backgroundColor: Color(0x998ebbfd)),
+              backgroundColor: Color.fromARGB(153, 127, 127, 127)),
         ],
       ),
     );
