@@ -129,18 +129,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
         width: double.infinity,
         child: MaterialButton(
             elevation: 5,
+            padding: EdgeInsets.all(15),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            color: Colors.white,
+            child: Text(
+              'REGISTER',
+              style: TextStyle(
+                  color: Color(0xff8ebbfd),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
             onPressed: () {
               FirebaseAuth.instance
                   .createUserWithEmailAndPassword(
                       email: _emailTextController.text,
                       password: _passwordTextController.text)
                   .then((value) {
-                print("REGISTER");
+                print("Register");
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Home()));
               }).onError((error, stackTrace) {
                 print("Error ${error.toString()}");
               });
+            }));
+  }
+
+  Widget buildSignUpFBBtn() {
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: 5),
+        width: double.infinity,
+        child: MaterialButton(
+            elevation: 5,
+            padding: EdgeInsets.all(15),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            color: Color.fromARGB(255, 66, 103, 178),
+            child: Text(
+              'REGISTER with Facebook',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Home()));
             }));
   }
 
@@ -186,6 +220,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       buildPassword(),
                       SizedBox(height: 20),
                       buildSignInBtn(),
+                      buildSignUpFBBtn(),
                     ],
                   ),
                 ),
