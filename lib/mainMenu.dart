@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:protingtiga/home.dart';
 import 'package:protingtiga/infoCovid.dart';
 import 'package:protingtiga/riwayat.dart';
-import 'package:protingtiga/sideBar.dart';
 import 'package:protingtiga/statistik.dart';
+import 'package:protingtiga/setting.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({Key? key}) : super(key: key);
@@ -13,44 +13,68 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-
   int currentIndex = 0;
-  final List<Widget> body =[
-    Home(),
-    Statistik(),
-    InfoCovid()
-  ];
+  final List<Widget> body = [Home(), Statistik(), Riwayat(), InfoCovid()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideBar(),
       appBar: AppBar(
-        title: Text('Socmed Covid Tracker'),
-      ),
+          backgroundColor: Color.fromARGB(0, 255, 255, 255),
+          elevation: 0,
+          title: Text(
+            "Social Media Covid Tracker",
+            style: TextStyle(
+              color: Color.fromARGB(205, 0, 0, 0),
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            FloatingActionButton.small(
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Setting(),
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.person,
+                size: 18,
+                color: Colors.black,
+              ),
+            ),
+          ],
+          automaticallyImplyLeading: false),
       body: body[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: ontap,
-        currentIndex: currentIndex ,
+        currentIndex: currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home"
-          ),
+              icon: Icon(Icons.home, color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.assessment),
-              label: "Statistik"
-          ),
+              icon: Icon(Icons.assessment,
+                  color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Statistik"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.description),
-              label: "Informasi Covid"
-          ),
+              icon:
+                  Icon(Icons.history, color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Riwayat"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.description,
+                  color: Color.fromARGB(39, 127, 127, 127)),
+              label: "Informasi Covid"),
         ],
       ),
     );
   }
 
-  void ontap(int index){
+  void ontap(int index) {
     setState(() {
       currentIndex = index;
     });
