@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:protingtiga/SignUp.dart';
 import 'package:protingtiga/forgetpass.dart';
+import 'package:protingtiga/home.dart';
 import 'package:protingtiga/mainMenu.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -136,6 +137,29 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget buildFBLoginBtn() {
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: 3),
+        width: double.infinity,
+        child: MaterialButton(
+            elevation: 5,
+            padding: EdgeInsets.all(15),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            color: Color.fromARGB(255, 66, 103, 178),
+            child: Text(
+              'LOGIN with Facebook',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => Home()));
+            }));
+  }
+
   Widget buildSignUpBtn() {
     return GestureDetector(
       onTap: () {
@@ -146,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RichText(
         text: TextSpan(children: [
           TextSpan(
-              text: 'Don\'t have an Account?',
+              text: 'Don\'t have an Account? ',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -202,6 +226,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       buildPassword(),
                       buildForgotPassBtn(),
                       buildLoginBtn(),
+                      buildFBLoginBtn(),
+                      SizedBox(height: 10),
                       buildSignUpBtn(),
                     ],
                   ),
@@ -214,3 +240,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
