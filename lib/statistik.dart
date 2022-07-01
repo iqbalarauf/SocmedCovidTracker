@@ -56,7 +56,7 @@ class _StatistikState extends State<Statistik> {
               covid_res.update!.total!.jumlahPositif.toString() +
               " jiwa"),
           width: 300,
-          color: Colors.orange,
+          color: Colors.blue,
           padding: EdgeInsets.all(16.0),
         ),
         Container(
