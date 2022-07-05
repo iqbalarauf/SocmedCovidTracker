@@ -5,6 +5,19 @@ import 'package:protingtiga/SignUp.dart';
 import 'package:protingtiga/forgetpass.dart';
 import 'package:protingtiga/home.dart';
 import 'package:protingtiga/mainMenu.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class EmailFieldValidator {
+  static String? validate(String value) {
+    return value.isEmpty ? 'Email can\'t be empty' : null;
+  }
+}
+
+class PasswordFieldValidator {
+  static String? validate(String value) {
+    return value.isEmpty ? 'Password can\'t be empty' : null;
+  }
+}
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -137,7 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget buildFBLoginBtn() {
+//Codingan COTS GOOGLE
+  Widget buildGoogleLoginBtn() {
     return Container(
         padding: EdgeInsets.symmetric(vertical: 3),
         width: double.infinity,
@@ -148,15 +162,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             color: Color.fromARGB(255, 66, 103, 178),
             child: Text(
-              'LOGIN with Facebook',
+              'Register with google',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
             onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => Home()));
+              launch('https://mail.google.com/');
             }));
   }
 
@@ -226,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       buildPassword(),
                       buildForgotPassBtn(),
                       buildLoginBtn(),
-                      buildFBLoginBtn(),
+                      buildGoogleLoginBtn(),
                       SizedBox(height: 10),
                       buildSignUpBtn(),
                     ],
@@ -240,4 +253,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

@@ -3,6 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:protingtiga/home.dart';
 
+class UsernameFieldValidator {
+  static String? validate(String value) {
+    return value.isEmpty ? 'Username can\'t be empty' : null;
+  }
+}
+
+class EmailFieldValidator {
+  static String? validate(String value) {
+    return value.isEmpty ? 'Email can\'t be empty' : null;
+  }
+}
+
+class PasswordFieldValidator {
+  static String? validate(String value) {
+    return value.isEmpty ? 'Password can\'t be empty' : null;
+  }
+}
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
