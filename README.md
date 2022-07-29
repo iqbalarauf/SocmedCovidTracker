@@ -1,4 +1,4 @@
-# protingtiga
+# Social Media-based Covid Tracker
 
 A new Flutter project.
 
